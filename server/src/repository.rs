@@ -71,6 +71,7 @@ impl TodoRepository for TodoRepo {
             "UPDATE todos SET title = $1, completed = $2 WHERE id = $3 RETURNING id, title, completed"
         ).bind(title)
         .bind(completed)
+        .bind(id)
         .fetch_one(&self.pool).await?;
 
         Ok(Some(rec))
